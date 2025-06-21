@@ -26,23 +26,24 @@ export default function Home() {
           <div className="md:w-3/5">
             <div>
               <p className="mb-8">
-          Finally, a jetpack that won't set your pants on fire (we're looking at you, 1960s prototypes). 
+          Finally, a jetpack that won&apos;t set your pants on fire (we&apos;re looking at you, 1960s prototypes). 
           The Flight Pack combines cutting-edge propulsion technology with our proprietary 
-          <span className="font-semibold"> "Please-Don't-Sue-Us"</span> safety system to deliver 
-          the aerial commuting solution you've been dreaming about since watching Saturday morning cartoons.
-        </p>
+          <span className="font-semibold"> &quot;Please-Don&apos;t-Sue-Us&quot;</span> safety system to deliver 
+          the aerial commuting solution you&apos;ve been dreaming about since watching Saturday morning cartoons.
+              </p>
+
 
         <h2 className="text-xl font-bold mb-4">Key Features:</h2>
         <ul className="list-disc pl-6 mb-8 space-y-2">
           <li><span className="font-semibold">Zero-to-Hero Mode:</span> Achieve heights of up to 500 feet, or roughly 100 disappointed pigeons</li>
           <li><span className="font-semibold">WhisperLoud™ Technology:</span> Only slightly louder than a commercial airliner taking off in your backyard</li>
-          <li><span className="font-semibold">Smart Landing Assist:</span> Because "falling with style" is only charming in animated movies</li>
+          <li><span className="font-semibold">Smart Landing Assist:</span> Because &quot;falling with style&quot; is only charming in animated movies</li>
           <li><span className="font-semibold">Premium Comfort Straps:</span> Engineered to distribute the crushing weight of your childhood dreams evenly across your shoulders</li>
         </ul>
 
         <h2 className="text-xl font-bold mb-4">Technical Specifications:</h2>
         <ul className="list-disc pl-6 mb-8 space-y-2">
-          <li><span className="font-semibold">Flight time:</span> 23 minutes (or one really good guitar solo)</li>
+          <li><span className="font-semibold">Flight time:</span> 23 minutes (or one really good guitar solo&apos;)</li>
           <li><span className="font-semibold">Maximum speed:</span> 65 mph (fast enough to outrun your responsibilities)</li>
           <li><span className="font-semibold">Fuel type:</span> Eco-friendly* compressed unicorn tears (*results may vary)</li>
           <li><span className="font-semibold">Weight capacity:</span> Up to 250 lbs of human and/or emotional baggage</li>
@@ -54,7 +55,7 @@ export default function Home() {
           wedding proposals, or avoiding your ex at the grocery store.
               </p>
               <p className="text-xs mt-2">
-                Patent pending. FAA approval pending. Your neighbor's approval definitely pending.
+                Patent pending. FAA approval pending. Your neighbor&apos;s approval definitely pending.
               </p>
             </div>
           </div>

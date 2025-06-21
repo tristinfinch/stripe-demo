@@ -24,11 +24,11 @@ export default function PaymentLinksPage() {
           <div className="md:w-3/5">
             <div className="mb-8">
               <p className="mb-4">
-                Finally, a jetpack that won't set your pants on fire (we're looking at you, 1960s prototypes). 
+                Finally, a jetpack that won&apos;t set your pants on fire (we&apos;re looking at you, 1960s prototypes). 
                 The Flight Pack combines cutting-edge propulsion technology with our proprietary 
-                <span className="font-semibold"> "Please-Don't-Sue-Us"</span> safety system.
+                <span className="font-semibold"> &quot;Please-Don&apos;t-Sue-Us&quot;</span> safety system.
               </p>
-              <p className="text-2xl font-bold mb-4">$99.99</p>
+              <p className="text-2xl font-bold mb-4">$5/month</p>
             </div>
             <Button
               asChild
