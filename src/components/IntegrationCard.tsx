@@ -32,9 +32,22 @@ export function IntegrationCard({
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        className="h-full"
+        className="h-full relative"
       >
-        <Card className="h-full flex flex-col hover:bg-gray-50 transition-colors">
+        <Card className="h-full flex flex-col relative overflow-hidden transition-all duration-300">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-transparent to-[#1C75BC] opacity-0 hover:opacity-20 z-0 pointer-events-none"
+            initial={{ scale: 0.8 }}
+            whileHover={{
+              scale: 1.2,
+              opacity: 0.3,
+              transition: { duration: 0.3 }
+            }}
+            style={{
+              originX: 0,
+              originY: 0,
+            }}
+          />
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle data-testid="card-title">{title}</CardTitle>
