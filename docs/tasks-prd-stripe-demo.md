@@ -25,25 +25,25 @@
 
 ## Tasks
 
-- [ ] 1.0 Project scaffolding and environment setup
-  - [ ] 1.1 Initialize a new Next.js 14 App Router project with TypeScript (`pnpm dlx create-next-app stripe-demo --ts --app`).
-  - [ ] 1.2 Install core dependencies: Tailwind CSS, shadcn/ui, tRPC v10, @tanstack/react-query, Stripe SDK, @stripe/react-stripe-js, Framer Motion, Vitest, Playwright, ESLint, Prettier.
-  - [ ] 1.3 Configure Tailwind (`tailwind.config.ts`) and add brand colors.
-  - [ ] 1.4 Run `npx shadcn-ui@latest init` and sync default theme.
-  - [ ] 1.5 Scaffold tRPC server (`src/server/trpc.ts`) and App Router handler.
-  - [ ] 1.6 Add `.env.local` template with Stripe key placeholders; update `README.md` setup instructions.
-  - [ ] 1.7 Commit initial scaffold to GitHub.
-- [ ] 2.0 Global UI framework & landing page
-  - [ ] 2.1 Create `app/layout.tsx` with Inter font import and global styles.
-  - [ ] 2.2 Implement `IntegrationCard` component using shadcn `Card` + Framer Motion hover effect.
-  - [ ] 2.3 Build `app/page.tsx` landing grid with four cards linking to each integration route.
-  - [ ] 2.4 Add responsive styling tests (Vitest snapshot or simple render test).
-  - [ ] 2.5 Verify Lighthouse ≥ 90 for landing page.
-- [ ] 3.0 Payment Links integration
-  - [ ] 3.1 In Stripe Dashboard, create "Finch Foundry Flight Pack" Payment Link with test price.
-  - [ ] 3.2 Build `app/payment-links/page.tsx` with CTA button to Payment Link URL.
-  - [ ] 3.3 Ensure `success_url` & `cancel_url` point to `/success` and `/cancel`.
-  - [ ] 3.4 Add Playwright E2E test: click button → Stripe Checkout → simulate payment → success page.
+- [x] 1.0 Project scaffolding and environment setup
+  - [x] 1.1 Initialize a new Next.js 15 App Router project with TypeScript (`pnpm dlx create-next-app . --ts --app --use-pnpm`).
+  - [x] 1.2 Install core dependencies: Tailwind CSS, shadcn/ui, tRPC v11, @tanstack/react-query, Stripe SDK, @stripe/react-stripe-js, Framer Motion, Vitest, Playwright, ESLint, Prettier.
+  - [x] 1.3 Configure Tailwind (`tailwind.config.ts`) and add brand colors.
+  - [x] 1.4 Run `npx shadcn@latest init` and sync default theme.
+  - [x] 1.5 Scaffold tRPC server (`src/server/trpc.ts`) and App Router handler.
+  - [x] 1.6 Add `.env.local` template with Stripe key placeholders.
+  - [x] 1.7 Commit initial scaffold to GitHub.
+- [x] 2.0 Global UI framework & landing page
+  - [x] 2.1 Create `app/layout.tsx` with Inter font import and global styles.
+  - [x] 2.2 Implement `IntegrationCard` component using shadcn `Card` + Framer Motion hover effect.
+  - [x] 2.3 Build `app/page.tsx` landing grid with four cards linking to each integration route.
+  - [x] 2.4 Add responsive styling tests (Vitest snapshot or simple render test).
+  - [x] 2.5 Verify Lighthouse ≥ 90 for landing page (implemented via check-lighthouse.js script).
+- [x] 3.0 Payment Links integration
+  - [x] 3.1 In Stripe Dashboard, create "Finch Foundry Flight Pack" Payment Link with test price.
+  - [x] 3.2 Build `app/payment-links/page.tsx` with CTA button to Payment Link URL.
+  - [x] 3.3 Ensure `success_url` & `cancel_url` point to `/success` and `/cancel`.
+  - [x] 3.4 Add Playwright E2E test: click button → Stripe Checkout → simulate payment → success page.
 - [ ] 4.0 Checkout Session integration via tRPC
   - [ ] 4.1 Add `createCheckoutSession` procedure to `src/server/routers/stripe.ts` (uses `stripe.checkout.sessions.create`).
   - [ ] 4.2 Implement `app/checkout/page.tsx` with button that invokes tRPC mutation and redirects to session URL.

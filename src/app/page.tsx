@@ -1,103 +1,92 @@
-import Image from "next/image";
+import { CreditCard, Link2, ShoppingCart, Zap } from "lucide-react"
+import Image from 'next/image'
+import { IntegrationCard } from '../components/IntegrationCard'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="container py-12 mx-auto px-4">
+      <div className="max-w-4xl mx-auto mb-12">
+        <h1 className="text-3xl font-bold mb-2 text-center">Finch Foundry Flight Pack™</h1>
+        <p className="text-xl italic text-center mb-8">
+          Your commute just got vertical.
+        </p>
+        
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="md:w-2/5">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/images/finchfoundryflightpack.png"
+              alt="Finch Foundry Flight Pack"
+              width={500}
+              height={500}
+              className="w-full h-auto max-h-[400px] object-contain rounded-none"
+              priority
+              quality={85}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <div className="md:w-3/5">
+            <div>
+              <p className="mb-8">
+          Finally, a jetpack that won't set your pants on fire (we're looking at you, 1960s prototypes). 
+          The Flight Pack combines cutting-edge propulsion technology with our proprietary 
+          <span className="font-semibold"> "Please-Don't-Sue-Us"</span> safety system to deliver 
+          the aerial commuting solution you've been dreaming about since watching Saturday morning cartoons.
+        </p>
+
+        <h2 className="text-xl font-bold mb-4">Key Features:</h2>
+        <ul className="list-disc pl-6 mb-8 space-y-2">
+          <li><span className="font-semibold">Zero-to-Hero Mode:</span> Achieve heights of up to 500 feet, or roughly 100 disappointed pigeons</li>
+          <li><span className="font-semibold">WhisperLoud™ Technology:</span> Only slightly louder than a commercial airliner taking off in your backyard</li>
+          <li><span className="font-semibold">Smart Landing Assist:</span> Because "falling with style" is only charming in animated movies</li>
+          <li><span className="font-semibold">Premium Comfort Straps:</span> Engineered to distribute the crushing weight of your childhood dreams evenly across your shoulders</li>
+        </ul>
+
+        <h2 className="text-xl font-bold mb-4">Technical Specifications:</h2>
+        <ul className="list-disc pl-6 mb-8 space-y-2">
+          <li><span className="font-semibold">Flight time:</span> 23 minutes (or one really good guitar solo)</li>
+          <li><span className="font-semibold">Maximum speed:</span> 65 mph (fast enough to outrun your responsibilities)</li>
+          <li><span className="font-semibold">Fuel type:</span> Eco-friendly* compressed unicorn tears (*results may vary)</li>
+          <li><span className="font-semibold">Weight capacity:</span> Up to 250 lbs of human and/or emotional baggage</li>
+        </ul>
+
+        <p className="text-sm italic">
+          Warning: Side effects may include: sudden popularity at parties, jealous stares from birds, 
+          and an irresistible urge to hum superhero theme songs. Not recommended for indoor use, 
+          wedding proposals, or avoiding your ex at the grocery store.
+              </p>
+              <p className="text-xs mt-2">
+                Patent pending. FAA approval pending. Your neighbor's approval definitely pending.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+        <IntegrationCard
+          title="Payment Links"
+          description="Simple way to accept payments with a link"
+          href="/payment-links"
+          icon={<Link2 className="text-primary" />}
+        />
+        <IntegrationCard
+          title="Checkout"
+          description="Hosted payment page with tRPC integration"
+          href="/checkout"
+          icon={<ShoppingCart className="text-primary" />}
+        />
+        <IntegrationCard
+          title="Elements"
+          description="Custom payment form with Stripe Elements"
+          href="/elements"
+          icon={<CreditCard className="text-primary" />}
+        />
+        <IntegrationCard
+          title="Direct API"
+          description="Direct Stripe API integration with webhooks"
+          href="/direct-api"
+          icon={<Zap className="text-primary" />}
+          status="beta"
+        />
+      </div>
     </div>
-  );
+  )
 }
