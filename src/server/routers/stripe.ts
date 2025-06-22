@@ -1,10 +1,9 @@
-import { publicProcedure, router } from '../trpc'
+import { publicProcedure, router } from '../trpc-instance'
 import { z } from 'zod'
 
-export const stripeRouter = router({
-  createCheckoutSession: publicProcedure
+export const stripePaymentRouter = router({
+    createCheckoutSession: publicProcedure
     .input(z.object({
-      productId: z.string(),
       quantity: z.number().min(1),
       successUrl: z.string(),
       cancelUrl: z.string()
@@ -13,14 +12,14 @@ export const stripeRouter = router({
       const session = await ctx.stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [{
-          price: input.productId,
+          price: 'price_1RcVamAcie4ZOM3HyFtgsfEE',
           quantity: input.quantity
         }],
-        mode: 'payment',
+        mode: 'subscription',
         success_url: input.successUrl,
         cancel_url: input.cancelUrl,
         metadata: {
-          product_id: input.productId
+          product_id: 'price_1RcVamAcie4ZOM3HyFtgsfEE'
         }
       })
       return { sessionId: session.id }

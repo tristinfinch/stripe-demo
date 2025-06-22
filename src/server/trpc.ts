@@ -1,16 +1,11 @@
-import { initTRPC } from '@trpc/server'
+import { router } from './trpc-instance'
 import Stripe from 'stripe'
-import { stripeRouter } from './routers/stripe'
+import { stripePaymentRouter } from './routers/stripe'
 
 interface Context {
   stripe: Stripe
 }
 
-const t = initTRPC.context<Context>().create()
-
-export const router = t.router
-export const publicProcedure = t.procedure
-export const middleware = t.middleware
 
 export function createContext(): Context {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -24,7 +19,7 @@ export function createContext(): Context {
 }
 
 export const appRouter = router({
-  stripe: stripeRouter
+  stripePayments: stripePaymentRouter
 })
 
 export type AppRouter = typeof appRouter
