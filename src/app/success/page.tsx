@@ -30,6 +30,8 @@ function SuccessPageContent() {
         if (!response.ok) throw new Error('Failed to fetch session')
         const data = await response.json()
         setSession(data.session)
+        // Clean URL after loading session
+        window.history.replaceState({}, document.title, window.location.pathname)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error')
       } finally {

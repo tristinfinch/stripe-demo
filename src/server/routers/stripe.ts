@@ -16,8 +16,8 @@ export const stripePaymentRouter = router({
           quantity: input.quantity
         }],
         mode: 'subscription',
-        success_url: input.successUrl,
-        cancel_url: input.cancelUrl,
+        success_url: `${input.successUrl}?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${input.cancelUrl}?session_id={CHECKOUT_SESSION_ID}`,
         metadata: {
           product_id: 'price_1RcVamAcie4ZOM3HyFtgsfEE'
         }
