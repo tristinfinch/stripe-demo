@@ -23,10 +23,9 @@ global.document = dom.window.document
 global.window = dom.window as unknown as Window & typeof globalThis
 global.navigator = dom.window.navigator
 
-// Create root element for React
-const root = document.createElement('div')
-root.id = 'root'
-document.body.appendChild(root)
+// Create root element for React that matches Next.js expectations
+const root = document.getElementById('__next')!
+root.innerHTML = ''
 
 // Mock window.matchMedia
 global.window.matchMedia = (query) => ({

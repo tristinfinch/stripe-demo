@@ -33,6 +33,7 @@ export function IntegrationCard({
         whileHover={{ y: -4 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
         className="h-full relative"
+        data-testid="integration-card"
       >
         <Card className="h-full flex flex-col relative overflow-hidden transition-all duration-300">
           <motion.div

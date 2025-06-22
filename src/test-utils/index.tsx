@@ -1,16 +1,10 @@
 import { render } from '@testing-library/react'
-import { screen } from '@testing-library/react'
+import { ReactElement } from 'react'
 
-const customRender = (ui: React.ReactElement, options = {}) => {
-  const result = render(ui, {
-    container: document.getElementById('root') || document.body,
+const customRender = (ui: ReactElement, options = {}) => {
+  return render(ui, {
     ...options
   })
-  
-  // Debug output
-  console.log('Rendered:', screen.debug())
-  
-  return result
 }
 
 export * from '@testing-library/react'
