@@ -1,27 +1,37 @@
 'use client'
 
+import { useState } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '@/components/ui/button'
-import { trpc } from '@/utils/api'
 import { Loader2, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
 export default function CheckoutPage() {
-  const { mutate: createCheckout, isPending } = trpc.stripePayments.createCheckoutSession.useMutation({
-    onSuccess: (data: { sessionId: string }) => {
-      window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`
-    },
-    onError: (error) => {
-      console.error('Checkout error:', error)
-      alert('Failed to initiate checkout: ' + error.message)
-    }
-  })
+  const [isLoading, setIsLoading] = useState(false)
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-  const handleBuyNow = () => {
-    createCheckout({
-      quantity: 1,
-      successUrl: `${window.location.origin}/success`,
-      cancelUrl: `${window.location.origin}/cancel`
-    })
+  const handleBuyNow = async () => {
+    setIsLoading(true)
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          cart: [{ 
+            priceId: 'basic', 
+            qty: 1 
+          }]
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+      const { id } = await res.json()
+      const stripe = await stripePromise
+      await stripe?.redirectToCheckout({ sessionId: id })
+    } catch (error) {
+      console.error('Checkout error:', error)
+      alert('Failed to initiate checkout')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleAddToCart = () => {
@@ -61,11 +71,11 @@ export default function CheckoutPage() {
             <div className="flex gap-4">
               <Button
                 onClick={handleBuyNow}
-                disabled={isPending}
+                disabled={isLoading}
                 size="lg"
                 className="flex-1"
               >
-                {isPending ? (
+                {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Processing...
