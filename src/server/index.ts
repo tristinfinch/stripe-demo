@@ -1,8 +1,8 @@
-import { router } from './trpc'
-import { stripeRouter } from './routers/stripe'
+import { router } from './trpc-instance'
+import { stripePaymentRouter } from './routers/stripe'
 
 export const appRouter = router({
-  stripe: stripeRouter,
+  stripe: stripePaymentRouter,
 })
 
 export type AppRouter = typeof appRouter

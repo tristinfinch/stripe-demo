@@ -1,7 +1,6 @@
 import { stripe } from '@/lib/stripe'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
-import type Stripe from 'stripe'
 
 export default async function SuccessPage() {
   const cookieStore = await cookies()
