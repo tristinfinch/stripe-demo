@@ -16,6 +16,12 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": "warn",
       "react/no-unescaped-entities": "warn"
     }
+  },
+  {
+    files: ["src/app/checkout/page.tsx"],
+    rules: {
+      "react/no-unescaped-entities": "off"
+    }
   }
 ];
 
