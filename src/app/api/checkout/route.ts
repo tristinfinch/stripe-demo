@@ -12,18 +12,17 @@ export async function POST(req: Request) {
   const idempotencyKey = requestHeaders.get('x-idempotency-key') || crypto.randomUUID()
   const { cart } = (await req.json()) as { cart: CartItem[] }
 
-  // Validate price IDs against environment variables
   const line_items = cart.map((item) => ({
-    price: item.priceId === 'basic' ? process.env.STRIPE_PRICE_BASIC : item.priceId,
+    price: item.priceId,
     quantity: item.qty,
   }))
 
   const session = await stripe.checkout.sessions.create(
     {
-      mode: 'subscription',
+      mode: 'payment',
       line_items,
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cart`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout`,
       metadata: { cartId: crypto.randomUUID() },
     },
     { idempotencyKey }

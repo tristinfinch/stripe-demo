@@ -25,20 +25,6 @@ export default async function SuccessPage() {
     expand: ['payment_intent'],
   })
 
-  let periodEnd: number | null = null
-  
-  if (session.subscription) {
-    try {
-      const subscriptionId = typeof session.subscription === 'string' 
-        ? session.subscription 
-        : (session.subscription as any).id
-      const subscription = await stripe.subscriptions.retrieve(subscriptionId) as any
-      periodEnd = subscription.current_period_end
-    } catch (error) {
-      console.error('Failed to retrieve subscription:', error)
-    }
-  }
-
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl text-center">
       <h1 className="text-3xl font-bold mb-4">
@@ -46,19 +32,12 @@ export default async function SuccessPage() {
       </h1>
       {session.metadata?.cartId && (
         <p className="text-xl mb-4">
-          Your order #{session.metadata.cartId} is confirmed.
+          Your purchase #{session.metadata.cartId} is confirmed.
         </p>
       )}
-      {periodEnd && (
-        <p className="text-xl mb-4">
-          Subscription: Active (renews {new Date(periodEnd * 1000).toLocaleDateString()})
-        </p>
-      )}
-      {session.subscription && !periodEnd && (
-        <p className="text-xl mb-4">
-          Subscription: Active
-        </p>
-      )}
+      <p className="text-xl mb-4">
+        Your one-time payment was successful
+      </p>
       <p className="text-xl mb-4">
         Status: {typeof session.payment_intent === 'object' ? session.payment_intent?.status : 'Processing'}
       </p>
