@@ -17,7 +17,7 @@ export default function CheckoutPage() {
         method: 'POST',
         body: JSON.stringify({ 
           cart: [{ 
-            priceId: 'basic', 
+            priceId: 'price_1RdfXkAcie4ZOM3HGAO3UxBp', 
             qty: 1 
           }]
         }),
@@ -34,9 +34,11 @@ export default function CheckoutPage() {
     }
   }
 
+  const [cart, setCart] = useState<Array<{priceId: string, qty: number}>>([])
+
   const handleAddToCart = () => {
-    // TODO: Implement cart functionality
-    alert('Cart functionality coming soon!')
+    setCart(prev => [...prev, { priceId: 'price_1RdfXkAcie4ZOM3HGAO3UxBp', qty: 1 }])
+    alert('Added to cart!')
   }
 
   return (
@@ -65,7 +67,7 @@ export default function CheckoutPage() {
                 The Flight Pack combines cutting-edge propulsion technology with our proprietary 
                 <span className="font-semibold"> "Please-Don't-Sue-Us"</span> safety system.
               </p>
-              <p className="text-2xl font-bold mb-4">$5/month</p>
+              <p className="text-2xl font-bold mb-4">$99.99 (one-time payment)</p>
             </div>
             
             <div className="flex gap-4">
