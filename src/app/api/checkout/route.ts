@@ -17,12 +17,13 @@ export async function POST(req: Request) {
     quantity: item.qty,
   }))
 
+  const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL;
   const session = await stripe.checkout.sessions.create(
     {
       mode: 'payment',
       line_items,
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout`,
+      success_url: `${origin}/success`,
+      cancel_url: `${origin}/checkout`,
       metadata: { cartId: crypto.randomUUID() },
     },
     { idempotencyKey }
