@@ -3,29 +3,36 @@
 import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '@/components/ui/button'
-import { Loader2, ShoppingCart } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
+import { useCart } from '@/providers/cart-provider'
 
 export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false)
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+  const { cart, clearCart } = useCart()
 
-  const handleBuyNow = async () => {
+  const handleCheckout = async () => {
     setIsLoading(true)
     try {
-      const res = await fetch('/api/checkout', {
+      // Get the first item's mode (all items should have same mode)
+      const mode = cart[0].priceId.includes('subscription') ? 'subscription' : 'payment'
+      
+      const res = await fetch('/api/stripe/session', {
         method: 'POST',
-        body: JSON.stringify({ 
-          cart: [{ 
-            priceId: 'price_1RdfXkAcie4ZOM3HGAO3UxBp', 
-            qty: 1 
-          }]
-        }),
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: cart[0].priceId,
+          mode
+        })
       })
+
+      if (!res.ok) throw new Error('Failed to create session')
+      
       const { id } = await res.json()
       const stripe = await stripePromise
       await stripe?.redirectToCheckout({ sessionId: id })
+      clearCart()
     } catch (error) {
       console.error('Checkout error:', error)
       alert('Failed to initiate checkout')
@@ -34,43 +41,43 @@ export default function CheckoutPage() {
     }
   }
 
-  const handleAddToCart = () => {
-    alert('Added to cart!')
-  }
-
   return (
     <div className="container py-12 mx-auto px-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-2 text-center">Finch Foundry Flight Pack™</h1>
-        <p className="text-xl italic text-center mb-8">
-          Your commute just got vertical.
-        </p>
+        <h1 className="text-3xl font-bold mb-2 text-center">Checkout</h1>
         
         <div className="flex flex-col md:flex-row gap-8 mb-12">
           <div className="md:w-2/5">
-            <Image
-              src="/images/finchfoundryflightpack.png"
-              alt="Finch Foundry Flight Pack"
-              width={500}
-              height={500}
-              className="w-full h-auto max-h-[400px] object-contain rounded-none"
-              priority
-            />
+            <div className="space-y-4">
+              {cart.map(item => (
+                <div key={item.id} className="flex items-center gap-4">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={100}
+                    height={100}
+                    className="w-20 h-20 object-contain"
+                  />
+                  <div>
+                    <h3 className="font-medium">{item.name}</h3>
+                    <p>${(item.price / 100).toFixed(2)}</p>
+                    <p>Qty: {item.quantity}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="md:w-3/5">
             <div className="mb-8">
-              <p className="mb-4">
-                Finally, a jetpack that won&apos;t set your pants on fire (we&apos;re looking at you, 1960s prototypes). 
-                The Flight Pack combines cutting-edge propulsion technology with our proprietary 
-                <span className="font-semibold"> &quot;Please-Don&apos;t-Sue-Us&quot;</span> safety system.
+              <p className="text-2xl font-bold mb-4">
+                Total: ${(cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) / 100).toFixed(2)}
               </p>
-              <p className="text-2xl font-bold mb-4">$99.99 (one-time payment)</p>
             </div>
             
             <div className="flex gap-4">
               <Button
-                onClick={handleBuyNow}
-                disabled={isLoading}
+                onClick={handleCheckout}
+                disabled={isLoading || cart.length === 0}
                 size="lg"
                 className="flex-1"
               >
@@ -80,17 +87,8 @@ export default function CheckoutPage() {
                     Processing...
                   </>
                 ) : (
-                  'Buy Now'
+                  `Checkout (${cart.length} item${cart.length !== 1 ? 's' : ''})`
                 )}
-              </Button>
-              <Button
-                onClick={handleAddToCart}
-                variant="outline"
-                size="lg"
-                className="flex-1"
-              >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Add to Cart
               </Button>
             </div>
           </div>

@@ -35,11 +35,14 @@ export default async function SuccessPage() {
         </p>
       )}
       <p className="text-xl mb-4">
-        Your one-time payment was successful
+        Your {session.mode === 'subscription' ? 'subscription' : 'purchase'} was successful!
       </p>
-      <p className="text-xl mb-4">
-        Status: {typeof session.payment_intent === 'object' ? session.payment_intent?.status : 'Processing'}
-      </p>
+      <div className="bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 className="font-bold mb-2">Order Details:</h3>
+        <p>Product: {session.metadata?.productName || 'Unknown'}</p>
+        <p>Amount: ${(session.amount_total || 0) / 100}</p>
+        <p>Status: {typeof session.payment_intent === 'object' ? session.payment_intent?.status : 'Processing'}</p>
+      </div>
       {session.customer_details?.email && (
         <p className="text-xl mb-4">
           Receipt sent to: {session.customer_details.email}
